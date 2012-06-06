@@ -1,0 +1,50 @@
+" Default colorschem 
+color desert
+
+" Set MacVim gui font
+set guifont=Meslo\ LG\ L\ DZ:h10
+
+" map jj for easy ESC
+inoremap jj <ESC>
+
+" Paste Toggle
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+
+" show invisible characters like textmate
+set listchars=tab:▸\ ,eol:¬
+
+" Toggle Invisibles
+nmap <silent> <leader>si :setlocal list!<cr>
+
+" Ack for the last search.
+nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+
+set showcmd
+" Show (partial) command in the status line
+
+" add json syntax highlighting
+au BufNewFile,BufRead *.json set ft=javascript
+
+" add  syntax highlighting
+au BufNewFile,BufRead *.json set ft=javascript
+
+" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
+
+" Alphabetical Sort of CSS Properties
+map <leader>c ?{<CR>jV/^\s*\}\=$<CR>k:sort<CR>:let @/=''<CR>
+
+" Status line updates
+set statusline+=%=   " Right align.
+
+" File format, encoding and type.  Ex: "(unix/utf-8/python)"
+set statusline+=(
+set statusline+=%{&ff}                        " Format (unix/DOS).
+set statusline+=/
+set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
+set statusline+=/
+set statusline+=%{&ft}                        " Type (python).
+set statusline+=)
+
