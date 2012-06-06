@@ -24,9 +24,6 @@ nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute
 set showcmd
 " Show (partial) command in the status line
 
-" add json syntax highlighting
-au BufNewFile,BufRead *.json set ft=javascript
-
 " add  syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
 
@@ -48,3 +45,18 @@ set statusline+=/
 set statusline+=%{&ft}                        " Type (python).
 set statusline+=)
 
+" Window Naviagion
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Fix for Bufferator messing with window layout
+let g:buffergator_autoexpand_on_split = 0
+
+" Change Bufferator to open in horizontal split (default is vertical)
+let g:buffergator_viewport_split_policy = "T"
+
+" Chnage Bufferator split size (default 40)
+let g:buffergator_split_size = 15
