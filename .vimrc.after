@@ -60,3 +60,4 @@ let g:buffergator_viewport_split_policy = "T"
 
 " Chnage Bufferator split size (default 40)
 let g:buffergator_split_size = 15
+
