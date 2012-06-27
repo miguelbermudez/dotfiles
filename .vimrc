@@ -136,7 +136,10 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set list listchars=tab:\ \ ,trail:·
+set listchars=tab:▸\ ,eol:¬
+
+" Specific tab width for Javascript
+au FileType javascript setl sw=4 sts=4 et
 
 " Searching
 set hlsearch
@@ -243,7 +246,7 @@ set modeline
 set modelines=10
 
 " Default color scheme
-color solarized
+color spacedust
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -272,7 +275,7 @@ map <leader>a :Ack!
 nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
 
 " Sparkup {{{
-let g:sparkupNextMapping = '<c-s>'
+let g:sparkupNextMapping = '<c-n>'
 let g:sparkupExecuteMapping='<c-e>'
 
 
@@ -300,3 +303,12 @@ set showmode
 
 map <leader>Rt :RunSpec<CR>
 map <leader>Lt :RunSpecLine<CR>
+
+" Show invisble characters
+nmap <leader>l :set list!<CR>
+
+" Rainbow Parentheses
+nmap <leader>R :RainbowParenthesesToggle<CR>
+
+" Close Buffer
+nmap ,d :b#<bar>bd#<CR>

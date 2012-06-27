@@ -1,0 +1,68 @@
+" Default colorschem 
+color oceandeep
+
+" Set MacVim gui font
+set guifont=Meslo\ LG\ L\ DZ:h12
+
+" map jj for easy ESC
+inoremap jj <ESC>
+
+" Paste Toggle
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+
+" show invisible characters like textmate
+set listchars=tab:▸\ ,eol:¬
+
+" Toggle Invisibles
+nmap <silent> <leader>si :setlocal list!<cr>
+
+" Ack for the last search.
+nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+
+set showcmd
+" Show (partial) command in the status line
+
+" add  syntax highlighting
+au BufNewFile,BufRead *.json set ft=javascript
+
+" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
+
+" Alphabetical Sort of CSS Properties
+map <leader>c ?{<CR>jV/^\s*\}\=$<CR>k:sort<CR>:let @/=''<CR>
+
+" Status line updates
+set statusline+=%=   " Right align.
+
+" File format, encoding and type.  Ex: "(unix/utf-8/python)"
+set statusline+=(
+set statusline+=%{&ff}                        " Format (unix/DOS).
+set statusline+=/
+set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
+set statusline+=/
+set statusline+=%{&ft}                        " Type (python).
+set statusline+=)
+
+" Window Naviagion
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Fix for Bufferator messing with window layout
+let g:buffergator_autoexpand_on_split = 0
+
+" Change Bufferator to open in horizontal split (default is vertical)
+let g:buffergator_viewport_split_policy = "T"
+
+" Chnage Bufferator split size (default 40)
+let g:buffergator_split_size = 15
+
+" Enalbe OSX clipboard
+set clipboard=unnamed
+
+" Set tab stops for HTML files
+autocmd FileType html setlocal shiftwidth=4 tabstop=4
