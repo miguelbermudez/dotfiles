@@ -1,8 +1,8 @@
 " Default colorschem 
-color desert
+color oceandeep
 
 " Set MacVim gui font
-set guifont=Meslo\ LG\ L\ DZ:h10
+set guifont=Meslo\ LG\ L\ DZ:h12
 
 " map jj for easy ESC
 inoremap jj <ESC>
@@ -61,3 +61,8 @@ let g:buffergator_viewport_split_policy = "T"
 " Chnage Bufferator split size (default 40)
 let g:buffergator_split_size = 15
 
+" Enalbe OSX clipboard
+set clipboard=unnamed
+
+" Set tab stops for HTML files
+autocmd FileType html setlocal shiftwidth=4 tabstop=4
