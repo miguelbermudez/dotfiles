@@ -66,3 +66,4 @@ set clipboard=unnamed
 
 " Set tab stops for HTML files
 autocmd FileType html setlocal shiftwidth=4 tabstop=4
+autocmd FileType php setlocal shiftwidth=4 tabstop=4
