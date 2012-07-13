@@ -1,5 +1,5 @@
 " Default colorschem 
-color oceandeep
+color Tomorrow-Night
 
 " Set MacVim gui font
 set guifont=Meslo\ LG\ L\ DZ:h12
@@ -67,3 +67,10 @@ set clipboard=unnamed
 " Set tab stops for HTML files
 autocmd FileType html setlocal shiftwidth=4 tabstop=4
 autocmd FileType php setlocal shiftwidth=4 tabstop=4
+
+" Set history 1000
+:set history=1000
+
+" Set + - to increase or decrease windows by sane amount
+nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>

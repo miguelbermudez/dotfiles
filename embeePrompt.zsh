@@ -19,3 +19,16 @@ PROMPT='%{%f%k%b%}
 
 RPROMPT='!%{%B%F{cyan}%}%!%{%f%k%b%} |%F{blue}%D{%R.%S %b %d %Y}'
 
+if [ ! -f ~/.dirs ]; then  # if doesn't exist, create it
+     touch ~/.dirs
+ fi
+
+alias show='cat ~/.dirs'
+
+save (){
+  command sed "/!$/d" ~/.dirs > ~/.dirs1; \mv ~/.dirs1 ~/.dirs; echo "$@"=\"`pwd`\" >> ~/.dirs; source ~/.dirs ; 
+}
+source ~/.dirs  # Initialization for the above 'save' facility: source the .sdirs file
+
+#Aliases
+alias gs='git status'

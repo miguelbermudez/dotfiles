@@ -35,3 +35,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/Users/miguelb/.rvm/gems/ruby-1.9.3-p194/bin:/Users/miguelb/.rvm/gems/ruby-1.9.3-p194@global/bin:/Users/miguelb/.rvm/rubies/ruby-1.9.3-p194/bin:/Users/miguelb/src/bin:/Users/miguelb/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
