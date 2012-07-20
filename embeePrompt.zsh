@@ -14,7 +14,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY=" %{%F{red}%}*%{%f%k%b%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 PROMPT='%{%f%k%b%}
-%{%K{black}%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%K{black}%}%~%{%B%F{green}%}$(git_prompt_info)%E%{%f%k%b%}
+%{%K{black}%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%K{black}%}%d%{%B%F{green}%}$(git_prompt_info)%E%{%f%k%b%}
 %{%K{black}%}$(_prompt_char)%{%K{black}%} %#%{%f%k%b%} '
 
 RPROMPT='!%{%B%F{cyan}%}%!%{%f%k%b%} |%F{blue}%D{%R.%S %b %d %Y}'
@@ -25,10 +25,27 @@ if [ ! -f ~/.dirs ]; then  # if doesn't exist, create it
 
 alias show='cat ~/.dirs'
 
-save (){
-  command sed "/!$/d" ~/.dirs > ~/.dirs1; \mv ~/.dirs1 ~/.dirs; echo "$@"=\"`pwd`\" >> ~/.dirs; source ~/.dirs ; 
+# Module: Change directory with bookmarks
+# path: bin/zsh-modules-available/cdbookmarks
+# http://ivan.fomentgroup.org/blog/2010/01/29/zsh-bookmarks-for-cd-change-directory-with-completion/
+
+function cdb_edit() {
+  vim ~/.cdbookmarks
 }
-source ~/.dirs  # Initialization for the above 'save' facility: source the .sdirs file
+
+function cdb() {
+  NewDir=`egrep "^$1	" ~/.cdbookmarks \
+     | sed 's/^.*	//'`;
+  echo cd $NewDir
+  cd $NewDir
+}
+
+function _cdb() {
+  reply=(`cat ~/.cdbookmarks | sed 's/	.*$//'`);
+}
+
+compctl -K _cdb cdb
 
 #Aliases
 alias gs='git status'
+alias clera='clear'

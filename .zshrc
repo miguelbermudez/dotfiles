@@ -40,3 +40,4 @@ export PATH=/Users/miguelb/.rvm/gems/ruby-1.9.3-p194/bin:/Users/miguelb/.rvm/gem
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
+
