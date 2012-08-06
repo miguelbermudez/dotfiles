@@ -1,5 +1,5 @@
 " Default colorschem 
-color Tomorrow-Night
+color codeschool
 
 " Set MacVim gui font
 set guifont=Meslo\ LG\ L\ DZ:h14
