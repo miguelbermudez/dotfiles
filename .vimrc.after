@@ -1,8 +1,8 @@
 " Default colorschem 
-color Tomorrow-Night
+color codeschool
 
 " Set MacVim gui font
-set guifont=Meslo\ LG\ L\ DZ:h12
+set guifont=Meslo\ LG\ L\ DZ:h14
 
 " map jj for easy ESC
 inoremap jj <ESC>
@@ -74,3 +74,6 @@ autocmd FileType php setlocal shiftwidth=4 tabstop=4
 " Set + - to increase or decrease windows by sane amount
 nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
+
+" Run php linter
+map <C-b> :w !php -l<CR>
