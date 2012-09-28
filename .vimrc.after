@@ -77,3 +77,9 @@ nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " Run php linter
 map <C-b> :w !php -l<CR>
+
+" Run ruby script
+map <D-r> :w !ruby <CR>
+
+set shell=/bin/sh
+set vb

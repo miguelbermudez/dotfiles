@@ -49,3 +49,6 @@ compctl -K _cdb cdb
 #Aliases
 alias gs='git status'
 alias clera='clear'
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+
