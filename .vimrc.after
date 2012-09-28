@@ -1,5 +1,5 @@
 " Default colorschem 
-color Tomorrow-Night
+color codeschool
 
 " Set MacVim gui font
 set guifont=Meslo\ LG\ L\ DZ:h12
@@ -31,7 +31,7 @@ au BufNewFile,BufRead *.json set ft=javascript
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
 
 " Alphabetical Sort of CSS Properties
-map <leader>c ?{<CR>jV/^\s*\}\=$<CR>k:sort<CR>:let @/=''<CR>
+map <leader>c ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
 
 " Status line updates
 set statusline+=%=   " Right align.
