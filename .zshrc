@@ -41,6 +41,7 @@ export PATH=/Users/miguelb/.rvm/gems/ruby-1.9.3-p194/bin:/Users/miguelb/.rvm/gem
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/6.7.7-6/include/ImageMagick/wand:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/6.7.7-6/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
