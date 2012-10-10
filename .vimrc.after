@@ -1,8 +1,9 @@
 " Default colorschem 
-color codeschool
+"color codeschool
+color kellys
 
 " Set MacVim gui font
-set guifont=Meslo\ LG\ L\ DZ:h11
+set guifont=Meslo\ LG\ L\ DZ:h10
 
 " map jj for easy ESC
 inoremap jj <ESC>
@@ -31,7 +32,9 @@ au BufNewFile,BufRead *.json set ft=javascript
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
 
 " Alphabetical Sort of CSS Properties
-map <leader>c ?{<CR>jV/^\s*\}\=$<CR>k:sort<CR>:let @/=''<CR>
+"map <leader>c ?{<CR>jV/^\s*\}\=$<CR>k:sort<CR>:let @/=''<CR>
+"Use CSSComb
+map <leader>c :CSScomb<CR>
 
 " Status line updates
 set statusline+=%=   " Right align.
@@ -75,6 +78,12 @@ autocmd FileType php setlocal shiftwidth=4 tabstop=4
 nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 
+" JavaScript (tab width 4 chr, wrap at 79th)
+autocmd FileType javascript set sw=4
+autocmd FileType javascript set ts=4
+autocmd FileType javascript set sts=4
+autocmd FileType javascript set textwidth=79
+
 " Run php linter
 map <C-b> :w !php -l<CR>
 
@@ -82,4 +91,13 @@ map <C-b> :w !php -l<CR>
 map <D-r> :w !ruby <CR>
 
 set shell=/bin/sh
+
+" Set nerdtree to automatically set root to active file's folder
+set autochdir
+let NERDTreeChDirMode=2
+
+" Disable Bell in MacVim
 set vb
+
+" Disable Printing!
+map <C-p> <ESC>
