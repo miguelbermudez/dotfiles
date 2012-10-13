@@ -26,7 +26,7 @@ ZSH=$HOME/.oh-my-zsh
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -39,7 +39,10 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/Users/miguelb/.rvm/gems/ruby-1.9.3-p194/bin:/Users/miguelb/.rvm/gems/ruby-1.9.3-p194@global/bin:/Users/miguelb/.rvm/rubies/ruby-1.9.3-p194/bin:/Users/miguelb/src/bin:/Users/miguelb/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/6.7.7-6/include/ImageMagick/wand:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/6.7.7-6/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
 

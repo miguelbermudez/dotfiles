@@ -9,13 +9,13 @@ function _prompt_char() {
 }
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" [%{%B%F{blue}%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{%f%k%b%K{black}%B%F{green}%}]"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{%f%k%b%B%F{green}%}]"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{%F{red}%}*%{%f%k%b%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 PROMPT='%{%f%k%b%}
-%{%K{black}%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%K{black}%}%d%{%B%F{green}%}$(git_prompt_info)%E%{%f%k%b%}
-%{%K{black}%}$(_prompt_char)%{%K{black}%} %#%{%f%k%b%} '
+%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%}%d%{%B%F{green}%}$(git_prompt_info)%E%{%f%k%b%}
+%}$(_prompt_char)%} %#%{%f%k%b%} '
 
 RPROMPT='!%{%B%F{cyan}%}%!%{%f%k%b%} |%F{blue}%D{%R.%S %b %d %Y}'
 
@@ -49,3 +49,6 @@ compctl -K _cdb cdb
 #Aliases
 alias gs='git status'
 alias clera='clear'
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+
