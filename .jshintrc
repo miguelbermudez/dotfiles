@@ -1,0 +1,19 @@
+{
+    "regexp": false,
+    "forin": true,
+    "noarg": true,
+    "noempty": true,
+    "eqeqeq": true,
+    "bitwise": true,
+    "undef": true,
+    "unused": true,
+    "curly": true,
+    "browser": true,
+    "devel": true,
+    "jquery": true,
+    "indent": 2,
+    "maxerr": 50,
+    "asi": true,
+    "trailing": true,
+    "predef": ["requirejs", "require", "App", "Handlebars", "Backbone"]
+}
