@@ -6,7 +6,9 @@ color kellys
 "set guifont=Meslo\ LG\ L\ DZ:h10
 set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h10
 
+" Require for vim-powerline
 call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+let g:Powerline_symbols = 'fancy'
 
 " map jj for easy ESC
 inoremap jj <ESC>

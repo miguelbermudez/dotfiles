@@ -1,5 +1,2 @@
 " Remap Leader
 let mapleader=","
-
-" Require for vim-powerline
-let g:Powerline_symbols = 'fancy'
