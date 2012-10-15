@@ -3,7 +3,10 @@
 color kellys
 
 " Set MacVim gui font
-set guifont=Meslo\ LG\ L\ DZ:h10
+"set guifont=Meslo\ LG\ L\ DZ:h10
+set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h10
+
+call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " map jj for easy ESC
 inoremap jj <ESC>
@@ -37,16 +40,16 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set f
 map <leader>c :CSScomb<CR>
 
 " Status line updates
-set statusline+=%=   " Right align.
+"set statusline+=%=   " Right align.
 
 " File format, encoding and type.  Ex: "(unix/utf-8/python)"
-set statusline+=(
-set statusline+=%{&ff}                        " Format (unix/DOS).
-set statusline+=/
-set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
-set statusline+=/
-set statusline+=%{&ft}                        " Type (python).
-set statusline+=)
+"set statusline+=(
+"set statusline+=%{&ff}                        " Format (unix/DOS).
+"set statusline+=/
+"set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
+"set statusline+=/
+"set statusline+=%{&ft}                        " Type (python).
+"set statusline+=)
 
 " Window Naviagion
 nnoremap <leader>w <C-w>v<C-w>l
@@ -79,8 +82,8 @@ nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " JavaScript (tab width 4 chr, wrap at 79th)
-autocmd FileType javascript set sw=4
-autocmd FileType javascript set ts=4
+autocmd FileType javascript set sw=2
+autocmd FileType javascript set ts=2
 autocmd FileType javascript set sts=4
 autocmd FileType javascript set textwidth=79
 
@@ -101,3 +104,30 @@ set vb
 
 " Disable Printing!
 map <C-p> <ESC>
+
+"Automatically reload .vimrc if it changes
+autocmd! bufwritepost .vimrc source %
+
+" Simple prettyify JSON
+:command PrettyJSON %!python -m json.tool
+
+" Syntastic
+nmap <leader>err :Errors<CR><C-W>j
+noremap <leader>y :SyntasticCheck<cr>
+let g:syntastic_error_symbol='✗'
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_javascript_checker="jshint"
+let g:syntastic_javascript_jshint_conf="~/.jshintrc"
+
+
+
+" JSBeautify
+let g:jsbeautify = {'indent_size': 2, 'indent_char': ' '}
+let g:htmlbeautify = {'indent_size': 4, 'indent_char': ' ', 'max_char': 78, 'brace_style': 'expand', 'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']}
+let g:cssbeautify = {'indent_size': 4, 'indent_char': ' '}
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
