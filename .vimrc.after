@@ -41,18 +41,6 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set f
 "Use CSSComb
 map <leader>c :CSScomb<CR>
 
-" Status line updates
-"set statusline+=%=   " Right align.
-
-" File format, encoding and type.  Ex: "(unix/utf-8/python)"
-"set statusline+=(
-"set statusline+=%{&ff}                        " Format (unix/DOS).
-"set statusline+=/
-"set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
-"set statusline+=/
-"set statusline+=%{&ft}                        " Type (python).
-"set statusline+=)
-
 " Window Naviagion
 nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
@@ -86,8 +74,7 @@ nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 " JavaScript (tab width 4 chr, wrap at 79th)
 autocmd FileType javascript set sw=2
 autocmd FileType javascript set ts=2
-autocmd FileType javascript set sts=4
-autocmd FileType javascript set textwidth=79
+autocmd FileType javascript set sts=2
 
 " Run php linter
 map <C-b> :w !php -l<CR>
@@ -111,7 +98,9 @@ map <C-p> <ESC>
 autocmd! bufwritepost .vimrc source %
 
 " Simple prettyify JSON
-:command PrettyJSON %!python -m json.tool
+if !exists(":PrettyJSON")
+  :command PrettyJSON %!python -m json.tool
+endif
 
 " Syntastic
 nmap <leader>err :Errors<CR><C-W>j
@@ -123,7 +112,6 @@ let g:syntastic_javascript_checker="jshint"
 let g:syntastic_javascript_jshint_conf="~/.jshintrc"
 
 
-
 " JSBeautify
 let g:jsbeautify = {'indent_size': 2, 'indent_char': ' '}
 let g:htmlbeautify = {'indent_size': 4, 'indent_char': ' ', 'max_char': 78, 'brace_style': 'expand', 'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']}
@@ -133,3 +121,23 @@ autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 " for css or scss
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+" for css or scss
+autocmd FileType less noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
+" Folding shortcut
+map <leader>zf $zf%
+
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d :",
+        \ &tabstop, &shiftwidth, &textwidth)
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+"TagBar Options
+let g:tagbar_autofocus=1
+let g:tagbar_autoclose=1

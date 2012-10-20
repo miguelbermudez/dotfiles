@@ -34,3 +34,4 @@ alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 export PATH=$HOME/local/node/bin:$PATH
 # export NODE_PATH=$HOME/local/node:$HOME/local/node/lib/node_modules
 export NODE_PATH="/usr/local/lib/node_modules/"
+export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
