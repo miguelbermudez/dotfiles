@@ -1,46 +1,66 @@
+" ============================================================================================================
 " Default colorschem 
 "color codeschool
 color kellys
 
+" ============================================================================================================
 " Set MacVim gui font
 "set guifont=Meslo\ LG\ L\ DZ:h10
 set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h10
 
+" ============================================================================================================
 " Require for vim-powerline
 call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 let g:Powerline_symbols = 'fancy'
 
+" ============================================================================================================
+" Disable the macvim toolbar
+set guioptions-=T
+
+" ============================================================================================================
 " map jj for easy ESC
 inoremap jj <ESC>
 
+" ============================================================================================================
+set hidden
+
+" ============================================================================================================
 " Paste Toggle
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
+" ============================================================================================================
 " show invisible characters like textmate
 set listchars=tab:▸\ ,eol:¬
 
+" ============================================================================================================
 " Toggle Invisibles
 nmap <silent> <leader>si :setlocal list!<cr>
 
+" ============================================================================================================
 " Ack for the last search.
 nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
 
+" ============================================================================================================
 set showcmd
 " Show (partial) command in the status line
 
+" ============================================================================================================
 " add  syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
 
+" ============================================================================================================
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
 
+" ============================================================================================================
 " Alphabetical Sort of CSS Properties
 "map <leader>c ?{<CR>jV/^\s*\}\=$<CR>k:sort<CR>:let @/=''<CR>
 "Use CSSComb
 map <leader>c :CSScomb<CR>
 
+" ============================================================================================================
 " Window Naviagion
 nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
@@ -48,74 +68,95 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" ============================================================================================================
+" Bufferator Options
 " Fix for Bufferator messing with window layout
 let g:buffergator_autoexpand_on_split = 0
-
 " Change Bufferator to open in horizontal split (default is vertical)
 let g:buffergator_viewport_split_policy = "T"
-
 " Chnage Bufferator split size (default 40)
 let g:buffergator_split_size = 15
 
+" ============================================================================================================
 " Enalbe OSX clipboard
 set clipboard=unnamed
 
+" ============================================================================================================
 " Set tab stops for HTML files
 autocmd FileType html setlocal shiftwidth=4 tabstop=4
 autocmd FileType php setlocal shiftwidth=4 tabstop=4
 
+" ============================================================================================================
 " Set history 1000
 :set history=1000
 
+" ============================================================================================================
 " Set + - to increase or decrease windows by sane amount
 nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 
+" ============================================================================================================
 " JavaScript (tab width 4 chr, wrap at 79th)
 autocmd FileType javascript set sw=2
 autocmd FileType javascript set ts=2
 autocmd FileType javascript set sts=2
 
+" ============================================================================================================
 " Run php linter
 map <C-b> :w !php -l<CR>
 
+" ============================================================================================================
 " Run ruby script
 map <D-r> :w !ruby <CR>
 
 set shell=/bin/sh
 
+" ============================================================================================================
+" NerdTREE options
 " Set nerdtree to automatically set root to active file's folder
 set autochdir
 let NERDTreeChDirMode=2
+" Make nerdtree look nice
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let g:NERDTreeWinSize = 30
 
+" ============================================================================================================
 " Disable Bell in MacVim
 set vb
 
+" ============================================================================================================
 " Disable Printing!
 map <C-p> <ESC>
 
-"Automatically reload .vimrc if it changes
-autocmd! bufwritepost .vimrc source %
-
+" ============================================================================================================
 " Simple prettyify JSON
 if !exists(":PrettyJSON")
   :command PrettyJSON %!python -m json.tool
 endif
 
+" ============================================================================================================
 " Syntastic
 nmap <leader>err :Errors<CR><C-W>j
 noremap <leader>y :SyntasticCheck<cr>
+"mark syntax errors with :signs
+let g:syntastic_enable_signs=0
 let g:syntastic_error_symbol='✗'
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
+"automatically jump to the error when saving the file
+let g:syntastic_auto_jump=0
+"show the error list automatically
+let g:syntastic_auto_loc_list=1
+"don't care about warnings
+let g:syntastic_quiet_warnings=0
+"use jshint for javascript chekcing
 let g:syntastic_javascript_checker="jshint"
 let g:syntastic_javascript_jshint_conf="~/.jshintrc"
 
-
+" ============================================================================================================
 " JSBeautify
 let g:jsbeautify = {'indent_size': 2, 'indent_char': ' '}
 let g:htmlbeautify = {'indent_size': 4, 'indent_char': ' ', 'max_char': 78, 'brace_style': 'expand', 'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u']}
-let g:cssbeautify = {'indent_size': 4, 'indent_char': ' '}
+let g:cssbeautify = {'indent_size': 2, 'indent_char': ' '}
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 " for html
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
@@ -124,9 +165,11 @@ autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " for css or scss
 autocmd FileType less noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
+" ============================================================================================================
 " Folding shortcut
 map <leader>zf $zf%
 
+" ============================================================================================================
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
@@ -138,6 +181,29 @@ function! AppendModeline()
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
-"TagBar Options
+" ============================================================================================================
+" TagBar Options
 let g:tagbar_autofocus=1
 let g:tagbar_autoclose=1
+
+" ============================================================================================================
+" Lusty Juggler Options
+let g:LustyJugglerSuppressRubyWarning = 1
+let g:LustyJugglerAltTabMode = 1
+let g:LustyJugglerShowKeys = 'a' " show a/s/d/f keys 
+
+" ============================================================================================================
+ "If you visually select something and hit paste
+" that thing gets yanked into your buffer. This
+" generally is annoying when you're copying one item
+" and repeatedly pasting it. This changes the paste
+" command in visual mode so that it doesn't overwrite
+" whatever is in your paste buffer.
+vnoremap p "_dP
+
+" ======================================================
+" vim-indent-guides options
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+

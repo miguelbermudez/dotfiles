@@ -15,5 +15,6 @@
     "maxerr": 50,
     "asi": true,
     "trailing": true,
-    "predef": ["requirejs", "require", "App", "Handlebars", "Backbone"]
+    "white": false,
+    "predef": ["requirejs", "require", "App", "Handlebars", "Backbone", "define", "Modernizr"]
 }

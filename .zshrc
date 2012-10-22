@@ -44,5 +44,4 @@ export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/6.7.7-6/lib/pkgconfig:$PKG
 export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
-
-
+NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
