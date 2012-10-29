@@ -6,7 +6,7 @@ color kellys
 " ============================================================================================================
 " Set MacVim gui font
 "set guifont=Meslo\ LG\ L\ DZ:h10
-set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h10
+set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
 
 " ============================================================================================================
 " Require for vim-powerline
@@ -35,6 +35,26 @@ set showmode
 set listchars=tab:▸\ ,eol:¬
 
 " ============================================================================================================
+" Disable backup
+set nobackup
+set nowritebackup
+set noswapfile
+
+" ============================================================================================================
+" Things to ignore
+set wildignore=*~
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif,*.pdf
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.class,.svn,*.gem
+
+" ============================================================================================================
 " Toggle Invisibles
 nmap <silent> <leader>si :setlocal list!<cr>
 
@@ -58,7 +78,7 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set f
 " Alphabetical Sort of CSS Properties
 "map <leader>c ?{<CR>jV/^\s*\}\=$<CR>k:sort<CR>:let @/=''<CR>
 "Use CSSComb
-map <leader>c :CSScomb<CR>
+map <leader>c :CSSComb<CR>
 
 " ============================================================================================================
 " Window Naviagion
@@ -139,18 +159,30 @@ endif
 " Syntastic
 nmap <leader>err :Errors<CR><C-W>j
 noremap <leader>y :SyntasticCheck<cr>
-"mark syntax errors with :signs
-let g:syntastic_enable_signs=0
-let g:syntastic_error_symbol='✗'
-"automatically jump to the error when saving the file
-let g:syntastic_auto_jump=0
-"show the error list automatically
-let g:syntastic_auto_loc_list=1
-"don't care about warnings
-let g:syntastic_quiet_warnings=0
+" Check syntax on file open
+let g:syntastic_check_on_open=1
+" Put errors on left side
+let g:syntastic_enable_signs=1
+" Only errors, not warnings please
+let g:syntastic_quiet_warnings=1
+" Only show errors when I ask
+let g:syntastic_auto_loc_list=2
 "use jshint for javascript chekcing
 let g:syntastic_javascript_checker="jshint"
 let g:syntastic_javascript_jshint_conf="~/.jshintrc"
+
+" Syntastic styles
+if has('unix')
+  let g:syntastic_error_symbol='★'
+  let g:syntastic_style_error_symbol='>'
+  let g:syntastic_warning_symbol='⚠'
+  let g:syntastic_style_warning_symbol='>'
+else
+  let g:syntastic_error_symbol='!'
+  let g:syntastic_style_error_symbol='>'
+  let g:syntastic_warning_symbol='.'
+  let g:syntastic_style_warning_symbol='>'
+endif
 
 " ============================================================================================================
 " JSBeautify
@@ -206,4 +238,23 @@ vnoremap p "_dP
 let g:indent_guides_auto_colors = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
+
+" ======================================================
+" Delete trailing whitespace on save
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+autocmd BufWrite *.js :call DeleteTrailingWS()
+
+" ======================================================
+" No syntax highlighting for any file that's larger than .5MB
+if has('autocmd')
+	autocmd BufReadPost * if getfsize(bufname("%")) > 512*1024 |
+	\ set syntax= |
+	\ endif
+endif
 
