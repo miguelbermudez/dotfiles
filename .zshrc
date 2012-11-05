@@ -45,3 +45,5 @@ export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

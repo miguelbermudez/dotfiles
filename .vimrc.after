@@ -1,7 +1,7 @@
 " ============================================================================================================
 " Default colorschem 
-"color codeschool
-color kellys
+color codeschool
+"color kellys
 
 " ============================================================================================================
 " Set MacVim gui font
@@ -9,9 +9,21 @@ color kellys
 set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
 
 " ============================================================================================================
+" Disable vi-compatibility
+set nocompatible
+
+" ============================================================================================================
+" Always show the statusline
+set laststatus=2
+
+" ============================================================================================================
+" Necessary to show Unicode glyphs
+set encoding=utf-8 
+
+" ============================================================================================================
 " Require for vim-powerline
-call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
-let g:Powerline_symbols = 'fancy'
+"call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+"let g:Powerline_symbols = 'fancy'
 
 " ============================================================================================================
 " Disable the macvim toolbar
@@ -134,7 +146,6 @@ set shell=/bin/sh
 " ============================================================================================================
 " NerdTREE options
 " Set nerdtree to automatically set root to active file's folder
-set autochdir
 let NERDTreeChDirMode=2
 " Make nerdtree look nice
 let NERDTreeMinimalUI = 1
@@ -258,3 +269,47 @@ if has('autocmd')
 	\ endif
 endif
 
+" ======================================================
+" Make writing rails eaiser"
+" create <%= foo %> erb tags using Ctrl-k in edit mode
+imap <silent> <C-K> <%=   %><Esc>3hi
+
+" create <% foo %> erb tags using Ctrl-j in edit mode
+imap <silent> <C-J> <%  %><Esc>2hi
+
+" ======================================================
+" Tell showmarks to not include the various brace marks (),{}, etc
+let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
+
+" ======================================================
+" ConqueTerm
+let g:ConqueTerm_InsertOnEnter = 0
+
+let g:ConqueTerm_CWInsert = 1
+let g:ConqueTerm_Color = 2
+let g:ConqueTerm_ReadUnfocused = 1 " update conqueterm buffer while we're not looking (for running tests)
+
+" Open up a variety of commands in the ConqueTerm
+nmap <silent> <Leader>cc :execute 'ConqueTermSplit script/console --irb=pry'<CR>
+nmap <silent> <Leader>pp :execute 'ConqueTermSplit pry'<CR>
+
+" Run the current file in a ConqueTerm, great for ruby tests
+let g:ConqueTerm_InsertOnEnter = 0
+let g:ConqueTerm_CWInsert = 1
+
+" Send the current selection to conqueterm. This lets you easily veal
+" Ruby code in an irb console. Note: you must have only one ConqueTerm
+" console open and running irb for this to work. Somehow it gets confused
+" when multiple consoles are open. If you know how to fix this let me know :)
+let g:ConqueTerm_SendVisKey = '<Leader>e'
+
+" prevent auto insert mode, which is helpful when using conque
+" term for running tests
+autocmd WinEnter * stopinsert
+
+" Cmd-Shift-R for RSpec
+nmap <silent> <D-R> :call RunRspecCurrentFileConque()<CR>
+" Cmd-Shift-L for RSpec Current Line
+nmap <silent> <D-L> :call RunRspecCurrentLineConque()<CR>
+" ,Cmd-R for Last conque command
+nmap <silent> ,<D-R> :call RunLastConqueCommand()<CR>
