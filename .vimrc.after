@@ -23,7 +23,7 @@ set encoding=utf-8
 " ============================================================================================================
 " Require for vim-powerline
 "call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
-"let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'fancy'
 
 " ============================================================================================================
 " Disable the macvim toolbar

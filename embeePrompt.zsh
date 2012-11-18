@@ -8,17 +8,6 @@ function _prompt_char() {
   fi
 }
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" [%{%B%F{blue}%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{%f%k%b%B%F{green}%}]"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{%F{red}%}*%{%f%k%b%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-
-PROMPT='%{%f%k%b%}
-%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} %{%b%F{yellow}%}%d%{%B%F{green}%}$(git_prompt_info)%E%{%f%k%b%}
-%}$(_prompt_char)%} %#%{%f%k%b%} '
-
-RPROMPT='!%{%B%F{cyan}%}%!%{%f%k%b%} |%F{blue}%D{%R.%S %b %d %Y}'
-
 if [ ! -f ~/.dirs ]; then  # if doesn't exist, create it
      touch ~/.dirs
  fi
@@ -50,5 +39,5 @@ function gt() {  gittower --status "$*"; }
 alias gs='git status'
 alias clera='clear'
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
