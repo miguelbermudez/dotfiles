@@ -39,5 +39,5 @@ function gt() {  gittower --status "$*"; }
 alias gs='git status'
 alias clera='clear'
 
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
