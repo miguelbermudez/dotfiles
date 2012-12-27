@@ -1,6 +1,5 @@
 --type-set=less=.less
 --type-set=sass=.sass,.scss
---type-set=sass=.sass,.scss
 --type-set=haml=.haml
 --type-set=rb=.rb
 --type-set=txt=.txt

@@ -49,7 +49,7 @@ NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-# AutoJump
+# Autojump
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
-alias rake="noglob rake"
+export HISTSIZE=100000 SAVEHIST=100000 HISTFILE=~/.zhistory
