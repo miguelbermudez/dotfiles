@@ -13,7 +13,9 @@ colorscheme solarized
 " ============================================================================================================
 " Set MacVim gui font
 "set guifont=Meslo\ LG\ L\ DZ:h10
-set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
+"set guifont=consolas:h13
+set guifont=Source\ Code\ Pro\:h13
+set linespace=2
 
 " ============================================================================================================
 " Disable vi-compatibility
@@ -268,6 +270,7 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 autocmd BufWrite *.js :call DeleteTrailingWS()
+nmap <Leader>d :call DeleteTrailingWS()<CR>
 
 " ======================================================
 " No syntax highlighting for any file that's larger than .5MB
@@ -326,9 +329,9 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " ======================================================
 " Black Hole Register
-noremap x "_x
-vnoremap p "_dP
-nmap <silent> ,<D-R> :call RunLastConqueCommand()<CR>
+"noremap x "_x
+"vnoremap p "_dP
+"nmap <silent> ,<D-R> :call RunLastConqueCommand()<CR>
 
 " ======================================================
 " Jasmine Stuff
