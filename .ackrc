@@ -5,4 +5,4 @@
 --type-set=txt=.txt
 --type-set=erb=.erb
 --type-set=coffee=.coffee
---type-set=md=.md
+--type-set=md=.md,.mdown
