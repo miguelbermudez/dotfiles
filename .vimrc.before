@@ -1,7 +1,3 @@
 " Remap Leader
 let mapleader=","
-
-call janus#disable_plugin('vroom')
-call janus#disable_plugin('vim-rspec')
-
 set hidden

@@ -8,12 +8,13 @@ let g:solarized_hitrail=1    "default value is 0
 syntax enable
 set background=dark
 colorscheme solarized
-"
+"colorscheme macvim
 
 " ============================================================================================================
 " Set MacVim gui font
 "set guifont=Meslo\ LG\ L\ DZ:h10
-set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
+"set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
+set guifont=Inconsolata\ for\ Powerline:h14
 
 " ============================================================================================================
 " Disable vi-compatibility
@@ -26,11 +27,6 @@ set laststatus=2
 " ============================================================================================================
 " Necessary to show Unicode glyphs
 set encoding=utf-8 
-
-" ============================================================================================================
-" Require for vim-powerline
-"call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
-"let g:Powerline_symbols = 'fancy'
 
 " ============================================================================================================
 " Disable the macvim toolbar
@@ -268,6 +264,7 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 autocmd BufWrite *.js :call DeleteTrailingWS()
+autocmd BufWrite *.php :call DeleteTrailingWS()
 
 " ======================================================
 " No syntax highlighting for any file that's larger than .5MB
@@ -326,10 +323,80 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " ======================================================
 " Black Hole Register
-noremap x "_x
-vnoremap p "_dP
-nmap <silent> ,<D-R> :call RunLastConqueCommand()<CR>
+"noremap x "_x
+"vnoremap p "_dP
+"nmap <silent> ,<D-R> :call RunLastConqueCommand()<CR>
 
 " ======================================================
 " Jasmine Stuff
 au BufRead,BufNewFile *_[Ss]pec.js set filetype=javascript-jasmine syntax=javascript
+
+" Enable surround command for double curly braces
+let g:surround_{char2nr('j')} = "{{ \r }}"" }
+
+" Powerline
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
+" Clojure options.
+let g:slime_target = "tmux"
+
+autocmd Syntax clojure RainbowParenthesesLoadRound
+autocmd BufEnter *.clj RainbowParenthesesToggle
+autocmd BufLeave *.clj RainbowParenthesesToggle
+
+let g:rbpt_colorpairs = [
+    \ ['magenta',     'purple1'],
+    \ ['cyan',        'magenta1'],
+    \ ['green',       'slateblue1'],
+    \ ['yellow',      'cyan1'],
+    \ ['red',         'springgreen1'],
+    \ ['magenta',     'green1'],
+    \ ['cyan',        'greenyellow'],
+    \ ['green',       'yellow1'],
+    \ ['yellow',      'orange1'],
+    \ ]
+let g:rbpt_max = 9
+
+
+" ---------------------------------------------------------------------------
+"  Automagic Clojure folding on defn's and defmacro's
+"
+function GetClojureFold()
+  if getline(v:lnum) =~ '^\s*(defn.*\s'
+    return ">1"
+  elseif getline(v:lnum) =~ '^\s*(defmacro.*\s'
+    return ">1"
+  elseif getline(v:lnum) =~ '^\s*(defmethod.*\s'
+    return ">1"
+  elseif getline(v:lnum) =~ '^\s*$'
+    let my_cljnum = v:lnum
+    let my_cljmax = line("$")
+
+    while (1)
+      let my_cljnum = my_cljnum + 1
+      if my_cljnum > my_cljmax
+        return "<1"
+      endif
+
+      let my_cljdata = getline(my_cljnum)
+
+      " If we match an empty line, stop folding
+      if my_cljdata =~ '^$'
+        return "<1"
+      else
+        return "="
+      endif
+    endwhile
+  else
+    return "="
+  endif
+endfunction
+
+function TurnOnClojureFolding()
+  setlocal foldexpr=GetClojureFold()
+  setlocal foldmethod=expr
+endfunction
+
+autocmd FileType clojure call TurnOnClojureFolding()
