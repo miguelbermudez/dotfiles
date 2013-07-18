@@ -13,8 +13,9 @@ colorscheme solarized
 " ============================================================================================================
 " Set MacVim gui font
 "set guifont=Meslo\ LG\ L\ DZ:h10
-"set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
-set guifont=Inconsolata\ for\ Powerline:h14
+set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
+"set guifont=Inconsolata\ for\ Powerline:h13
+"set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 
 " ============================================================================================================
 " Disable vi-compatibility
