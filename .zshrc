@@ -1,17 +1,15 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="blinks"
+ZSH_THEME="robbyrussell"
 
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
+ alias ohmyzsh="vim ~/.oh-my-zsh"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -31,25 +29,35 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git heroku osx rails ruby rvm history)
+plugins=(git ruby gem osx brew rbenv node npm byte autojump history)
+
+# Customize to your needs...
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH=/Users/miguelb/src/bin:/Users/miguelb/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin/usr/X11/bin
-export PATH=/usr/local/bin:$PATH
+# AutoJump
+[[ -f `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
-export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$PATH
-export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/6.7.7-6/include/ImageMagick/wand:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="/usr/local/Cellar/imagemagick/6.7.7-6/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+# virtualenv should use Distribute instead of legacy setuptools
+export VIRTUALENV_DISTRIBUTE=true
+# Centralized location for new virtual environments
+export PIP_VIRTUALENV_BASE=$HOME/Virtualenvs
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+# cache pip-installed packages to avoid re-downloading
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
-NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
+#ClosureScript
+export CLOJURESCRIPT_HOME=/Users/miguelb/src/clojurescript
+export PATH=$CLOJURESCRIPT_HOME/bin:$PATH
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+syspip(){
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
 
-# Autojump
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+# Pass bad match onto command (solves situations like `git reset --soft HEAD^` otherwise you would have to scape the "^"
+setopt NO_MATCH
 
-export HISTSIZE=100000 SAVEHIST=100000 HISTFILE=~/.zhistory
+# RBenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
