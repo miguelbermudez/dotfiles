@@ -39,37 +39,47 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
-     yaml
-     (html :variables
-           web-fmt-tool 'prettier)
+     (auto-completion :variables
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-snippets-in-popup t)
+     better-defaults
      clojure
+		 colors
+     emacs-lisp
      emoji
-     lsp
+     (git :variables
+          git-magit-status-fullscreen t
+          git-enable-github-support t
+          git-gutter-use-fringe t)
      (javascript :variables
                  javascript-backend 'lsp
                  javascript-fmt-tool 'prettier
                  js2-basic-offset 2
                  js-indent-level 2 )
+     helm
+     (html :variables
+           web-fmt-tool 'prettier)
+     lsp
+     (markdown :variables
+		           markdown-live-preview-engine 'vmd)
+     ocaml
+		 (org :variables 
+		      org-enable-github-support t)
      prettier
-     (typescript :variables
-                 typescript-fmt-tool 'prettier
-                 typescript-backend 'lsp
-                 typescript-fmt-on-save t)
-     auto-completion
-     better-defaults
-     emacs-lisp
      git
-     (markdown :variables markdown-live-preview-engine 'vmd)
      neotree
-     org
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      ;; spell-checking
+     spacemacs-layouts
      syntax-checking
+     (typescript :variables
+                 typescript-fmt-tool 'prettier
+                 typescript-backend 'lsp
+                 typescript-fmt-on-save t)
      version-control
-     ocaml
+     yaml
      )
 
    ;; List of additional packages that will be installed without being
