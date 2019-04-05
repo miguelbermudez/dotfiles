@@ -1,0 +1,37 @@
+#source ~/src/antigen/antigen.zsh
+
+antigen use oh-my-zsh
+
+if [ "$OSTYPE"="darwin15.0" ]; then
+  antigen bundle osx
+  antigen bundle brew
+fi
+
+# Bundles
+antigen bundles <<EOBUNDLES
+  rupa/z
+  git
+  tmux
+  osx
+  history
+  colorize
+  pip
+  lein
+  command-not-found
+  zsh-users/zsh-syntax-highlighting
+  zsh-users/zsh-autosuggestions
+  zsh-users/zsh-completions
+  psprint/zsh-navigation-tools
+  desyncr/zsh-icdiff
+  sevanteri/zsh-dir-scroller
+  docker
+  extract
+EOBUNDLES
+
+# bindkey '^ ' autosuggest-accept
+
+
+antigen theme norm
+
+antigen apply
+

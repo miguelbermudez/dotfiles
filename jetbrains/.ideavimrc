@@ -1,0 +1,14 @@
+source ~/.vimrc
+
+":map \r :action ReformatCode<CR>
+
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+
+imap fd <Esc>
+set timeoutlen=1000
+
+set surround
+

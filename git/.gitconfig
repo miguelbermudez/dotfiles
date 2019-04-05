@@ -1,0 +1,40 @@
+[user]
+	name = Miguel Bermudez
+	email = miguel@miguelbermudez.com
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --date-order
+	lgf = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+	lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --date-order --branches --remotes --tags --decorate
+	log1 = log --pretty=oneline --abbrev-commit --decorate
+	log = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate
+	ll = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
+	lds = log --pretty=format:\"%C(yellow)%h\\\\ %ad%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --date=short
+	tree = log --all --graph --decorate=short --color --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)%x09%C(black)%an: %s %C(reset)'
+	patch = !git --no-pager diff --no-color
+	save = !git add -A && git commit -m 'SAVEPOINT'
+	wip = commit -am "WIP"
+	undo = reset HEAD~1 --mixed
+
+	# https://haacked.com/archive/2014/07/28/github-flow-aliases/
+	# This commits everything in my working directory and then does a hard reset to remove that commit. 
+	# The nice thing is, the commit is still there, but it’s just unreachable. 
+	# Unreachable commits are a bit inconvenient to restore, 
+	# but at least they are still there. You can run the git reflog command and find the SHA of the commit 
+	# if you realize later that you made a mistake with the reset. The commit message will be “WIPE SAVEPOINT” in this case.
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[core]
+	excludesfile = /Users/bermudem/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
