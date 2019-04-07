@@ -533,6 +533,16 @@ before packages are loaded."
   (add-hook 'after-init-hook #'night-owl-update-evil-cursors)
   (add-hook 'spacemacs-post-theme-change-hook #'night-owl-update-evil-cursors)
 
+  ;; Nice Comment Dividers
+  (defun fill-to-end ()
+    (interactive)
+    (save-excursion
+      (end-of-line)
+      (while (< (current-column) 80)
+        (insert-char ?-)))) 
+
+  (global-set-key (kbd "C-x p") 'fill-to-end) 
+
 
   (setq tab-always-indent t)
   )
