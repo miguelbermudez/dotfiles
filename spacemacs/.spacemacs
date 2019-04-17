@@ -1,4 +1,4 @@
-t;; -*- mode: emacs-lisp -*-
+;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -52,18 +52,17 @@ This function should only modify configuration layer settings."
           git-enable-github-support t
           git-gutter-use-fringe t)
      (javascript :variables
-                 javascript-backend 'lsp
+                 ;; javascript-backend 'lsp
                  javascript-fmt-tool 'prettier
                  js2-basic-offset 2
                  js-indent-level 2 )
      helm
      (html :variables
            web-fmt-tool 'prettier)
-     lsp
+     ;; lsp
      (markdown :variables
 		           markdown-live-preview-engine 'vmd)
-     ocaml
-		 (org :variables 
+		 (org :variables
 		      org-enable-github-support t)
      prettier
      git
@@ -76,10 +75,12 @@ This function should only modify configuration layer settings."
      syntax-checking
      (typescript :variables
                  typescript-fmt-tool 'prettier
-                 typescript-backend 'lsp
+                 ;; typescript-backend 'lsp
                  typescript-fmt-on-save t)
      version-control
      yaml
+     ocaml
+     reason
      )
 
    ;; List of additional packages that will be installed without being
@@ -89,7 +90,10 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(doom-themes)
+   dotspacemacs-additional-packages '(
+                                      doom-themes
+                                      solaire-mode
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -193,11 +197,14 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(
-                         ;; (night-owl :location (recipe :fetcher github
-                         ;;                              :repo "aaronjensen/night-owl-emacs"))
-                         doom-molokai
+   dotspacemacs-themes '(doom-city-lights
+                         doom-challenger-deep
+                         (night-owl :location (recipe :fetcher github
+                                                      :repo "aaronjensen/night-owl-emacs"))doom-molokai
+                         spacemacs-dark
                          spacemacs-light
+                         doom-nord-light
+                         doom-solarized-light
                          )
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -220,7 +227,8 @@ It should only modify the values of Spacemacs settings."
    ;;                             :weight normal
    ;;                             :width normal)
    dotspacemacs-default-font '("Iosevka"
-                               :size 14
+                               ;; :size 14
+                               :powerline-scale 1.1
                                :weight normal
                                :width normal)
 
@@ -546,6 +554,7 @@ before packages are loaded."
 
 
   (setq tab-always-indent t)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -579,11 +588,10 @@ This function is called at the very end of Spacemacs initialization."
      ("TEMP" . "#b1951d")
      ("FIXME" . "#dc752f")
      ("XXX" . "#dc752f")
-     ("XXXX" . "#dc752f")
-     ("???" . "#dc752f"))))
+     ("XXXX" . "#dc752f"))))
  '(package-selected-packages
    (quote
-    (emojify emoji-cheat-sheet-plus company-emoji vmd-mode night-owl-theme lsp-ui company-lsp lsp-mode ht quelpa yasnippet-snippets yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill toc-org tide typescript-mode tagedit symon string-inflection spaceline-all-the-icons spaceline powerline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters pug-mode popwin persp-mode password-generator paradox overseer orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum livid-mode skewer-mode linum-relative link-hint less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-pos-tip pos-tip flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu emmet-mode elisp-slime-nav editorconfig dumb-jump doom-modeline all-the-icons memoize diff-hl define-word counsel-projectile projectile counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company column-enforce-mode clojure-snippets clojure-cheatsheet clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu highlight cider sesman pkg-info clojure-mode epl centered-cursor-mode browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line avy ac-ispell auto-complete helm helm-core popup f s magit git-commit ghub which-key use-package pcre2el org-plus-contrib hydra evil goto-chg diminish bind-map bind-key writeroom-mode with-editor undo-tree treepy spinner shrink-path seq queue prettier-js magit-svn magit-popup let-alist json-navigator helm-org-rifle helm-git-grep graphql gitignore-templates font-lock+ evil-unimpaired eldoc-eval dotenv-mode)))
+    (flycheck-ocaml solaire-mode reason-mode doom-themes emojify emoji-cheat-sheet-plus company-emoji vmd-mode night-owl-theme lsp-ui company-lsp lsp-mode ht quelpa yasnippet-snippets yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill toc-org tide typescript-mode tagedit symon string-inflection spaceline-all-the-icons spaceline powerline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters pug-mode popwin persp-mode password-generator paradox overseer orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum livid-mode skewer-mode linum-relative link-hint less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-pos-tip pos-tip flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu emmet-mode elisp-slime-nav editorconfig dumb-jump doom-modeline all-the-icons memoize diff-hl define-word counsel-projectile projectile counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company column-enforce-mode clojure-snippets clojure-cheatsheet clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu highlight cider sesman pkg-info clojure-mode epl centered-cursor-mode browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line avy ac-ispell auto-complete helm helm-core popup f s magit git-commit ghub which-key use-package pcre2el org-plus-contrib hydra evil goto-chg diminish bind-map bind-key writeroom-mode with-editor undo-tree treepy spinner shrink-path seq queue prettier-js magit-svn magit-popup let-alist json-navigator helm-org-rifle helm-git-grep graphql gitignore-templates font-lock+ evil-unimpaired eldoc-eval dotenv-mode)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef"))))
 (custom-set-faces
