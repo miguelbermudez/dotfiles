@@ -543,12 +543,13 @@ before packages are loaded."
   (add-hook 'spacemacs-post-theme-change-hook #'night-owl-update-evil-cursors)
 
   ;; Nice Comment Dividers
-  (defun fill-to-end ()
-    (interactive)
+  (defun fill-to-end (char)
+    "Ask for character."
+    (interactive "sEnter comment character: ")
     (save-excursion
       (end-of-line)
       (while (< (current-column) 80)
-        (insert-char ?-)))) 
+        (insert-char (string-to-char char)))))
 
   (global-set-key (kbd "C-x p") 'fill-to-end) 
 
