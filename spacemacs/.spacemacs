@@ -45,6 +45,7 @@ This function should only modify configuration layer settings."
      better-defaults
      clojure
 		 colors
+     elixir
      emacs-lisp
      emoji
      (git :variables
