@@ -199,9 +199,10 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(doom-city-lights
                          doom-challenger-deep
-                         (night-owl :location (recipe :fetcher github
-                                                      :repo "aaronjensen/night-owl-emacs"))doom-molokai
+                         doom-molokai
                          spacemacs-dark
+                         (night-owl :location (recipe :fetcher github
+                                                      :repo "aaronjensen/night-owl-emacs"))
                          spacemacs-light
                          doom-nord-light
                          doom-solarized-light
