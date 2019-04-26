@@ -1,8 +1,4 @@
 
-#fnm config
-set PATH /Users/bermudem/.fnm $PATH
-fnm env --multi | source
-
 # git abbreviations
 abbr -a gss 		   git status -s
 abbr -a gst 			 git status
@@ -18,3 +14,7 @@ abbr -a gco git checkout
 abbr -a gcb git checkout -b
 
 
+
+# fnm
+set PATH $HOME/.fnm $PATH
+fnm env --multi | source
