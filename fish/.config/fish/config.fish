@@ -14,7 +14,11 @@ abbr -a gco git checkout
 abbr -a gcb git checkout -b
 
 
-
 # fnm
 set PATH $HOME/.fnm $PATH
 fnm env --multi | source
+
+# golang
+set -x GOPATH ~/golang
+set PATH /usr/local/go/bin $PATH $GOPATH/bin
+source ~/.asdf/asdf.fish
