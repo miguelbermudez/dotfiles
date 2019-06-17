@@ -94,6 +94,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       doom-themes
                                       solaire-mode
+                                      exec-path-from-shell
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -216,7 +217,8 @@ It should only modify the values of Spacemacs settings."
    ;; to create your own spaceline theme. Value can be a symbol or list with\
    ;; additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   ;; dotspacemacs-mode-line-theme '(all-the-icons :separator none :separator-scale 1.0)
+   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.0)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -229,7 +231,7 @@ It should only modify the values of Spacemacs settings."
    ;;                             :weight normal
    ;;                             :width normal)
    dotspacemacs-default-font '("Iosevka"
-                               ;; :size 14
+                               :size 24
                                :powerline-scale 1.1
                                :weight normal
                                :width normal)
@@ -486,7 +488,11 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
   (evil-leader/set-key "/" 'spacemacs/helm-project-do-ag)
+
+  ;; grab shell env paths
+  (exec-path-from-shell-initialize)
 
   ;; looks
   (setq-default line-spacing 0.1)
@@ -558,6 +564,20 @@ before packages are loaded."
 
   (setq tab-always-indent t)
 
+  ;; elixir
+  (eval-after-load "elixir-mode"
+    '(defun elixir-format--mix-executable ()
+       (string-trim-right (shell-command-to-string "asdf which mix"))))
+
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages 'org-babel-do-load-languages
+     '(
+       (python . t)
+       (javascript . t)
+       (js . t)
+       (clojure . t)
+       )))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -575,6 +595,7 @@ This function is called at the very end of Spacemacs initialization."
  '(ansi-color-names-vector
    ["#d2ceda" "#f2241f" "#67b11d" "#b1951d" "#3a81c3" "#a31db1" "#21b8c7" "#655370"])
  '(evil-want-Y-yank-to-eol nil)
+ '(helm-ag-base-command "rg --vimgrep --no-heading --smart-case")
  '(hl-todo-keyword-faces
    (quote
     (("TODO" . "#dc752f")
@@ -594,7 +615,7 @@ This function is called at the very end of Spacemacs initialization."
      ("XXXX" . "#dc752f"))))
  '(package-selected-packages
    (quote
-    (flycheck-ocaml solaire-mode reason-mode doom-themes emojify emoji-cheat-sheet-plus company-emoji vmd-mode night-owl-theme lsp-ui company-lsp lsp-mode ht quelpa yasnippet-snippets yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill toc-org tide typescript-mode tagedit symon string-inflection spaceline-all-the-icons spaceline powerline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters pug-mode popwin persp-mode password-generator paradox overseer orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum livid-mode skewer-mode linum-relative link-hint less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-pos-tip pos-tip flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu emmet-mode elisp-slime-nav editorconfig dumb-jump doom-modeline all-the-icons memoize diff-hl define-word counsel-projectile projectile counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company column-enforce-mode clojure-snippets clojure-cheatsheet clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu highlight cider sesman pkg-info clojure-mode epl centered-cursor-mode browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line avy ac-ispell auto-complete helm helm-core popup f s magit git-commit ghub which-key use-package pcre2el org-plus-contrib hydra evil goto-chg diminish bind-map bind-key writeroom-mode with-editor undo-tree treepy spinner shrink-path seq queue prettier-js magit-svn magit-popup let-alist json-navigator helm-org-rifle helm-git-grep graphql gitignore-templates font-lock+ evil-unimpaired eldoc-eval dotenv-mode)))
+    (exunit eglot flymake jsonrpc exec-path-from-shell flycheck-ocaml solaire-mode reason-mode doom-themes emojify emoji-cheat-sheet-plus company-emoji vmd-mode night-owl-theme lsp-ui company-lsp lsp-mode ht quelpa yasnippet-snippets yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill toc-org tide typescript-mode tagedit symon string-inflection spaceline-all-the-icons spaceline powerline smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters pug-mode popwin persp-mode password-generator paradox overseer orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum livid-mode skewer-mode linum-relative link-hint less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-pos-tip pos-tip flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu emmet-mode elisp-slime-nav editorconfig dumb-jump doom-modeline all-the-icons memoize diff-hl define-word counsel-projectile projectile counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company column-enforce-mode clojure-snippets clojure-cheatsheet clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu highlight cider sesman pkg-info clojure-mode epl centered-cursor-mode browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line avy ac-ispell auto-complete helm helm-core popup f s magit git-commit ghub which-key use-package pcre2el org-plus-contrib hydra evil goto-chg diminish bind-map bind-key writeroom-mode with-editor undo-tree treepy spinner shrink-path seq queue prettier-js magit-svn magit-popup let-alist json-navigator helm-org-rifle helm-git-grep graphql gitignore-templates font-lock+ evil-unimpaired eldoc-eval dotenv-mode)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef"))))
 (custom-set-faces
