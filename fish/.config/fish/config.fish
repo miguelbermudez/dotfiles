@@ -15,18 +15,15 @@ abbr -a gcb git checkout -b
 
 # fnm
 set PATH $HOME/.fnm $PATH
-fnm env --multi | source
-
-# golang
-set -x GOPATH ~/golang
-set PATH /usr/local/go/bin $PATH $GOPATH/bin
+#fnm env --multi | source
 
 # asdf
 source ~/.asdf/asdf.fish
 
-# flutter
-set PATH $PATH $GOPATH/bin ~/Work/flutter/bin 
-set JAVA_OPTS '-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
-
 # IEX
 set ERL_AFLAGS '-kernel shell_history enabled'
+
+# fzf
+set FZF_DEFAULT_COMMAND '(git ls-tree -r --name-only HEAD || find . -path "*/\.*" -prune -o -type f -print -o -type l -print | sed s/^..//) 2> /dev/null'
+
+set FZF_DEFAULT_OPTS '--layout=reverse --inline-info'
