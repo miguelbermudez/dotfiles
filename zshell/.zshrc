@@ -62,15 +62,21 @@ fpath=($fpath "/home/miguelb/.zfunctions")
 
 
 # ZPLUG
+# zplug basics:
+# - `zplug status` to see if packages are up to date
+# - `zplug update` to update packages
+# - `zplug list` to see currently managed packages
+# - `zplug clean` to clear out now unmanaged packages
+# - `zplug 'owner/repo'` to use a plugin from https://github.com/$owner/$repo
 source ~/.zplug/init.zsh
-zplug "junegunn/fzf-bin", 			from:gh-r, as:command, rename-to:fzf
 zplug "zsh-users/zsh-completions"
+zplug 'zsh-users/zsh-autosuggestions' # (like fish)
+zplug 'zsh-users/zsh-completions', 		depth:1 # more completions
 zplug "zsh-users/zsh-syntax-highlighting", 	defer:2
-zplug "tarruda/zsh-autosuggestions",            defer:3
-zplug "zdharma/fast-syntax-highlighting",	defer:3
-zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "b4b4r07/ultimate", 			as:theme
 zplug "plugins/git",   				from:oh-my-zsh
+zplug "plugins/ssh-agent",   			from:oh-my-zsh
+zplug "junegunn/fzf-bin", 			from:gh-r, as:command, rename-to:fzf
 zplug "junegunn/fzf", 				from:github, use:"shell/completion.zsh"
 zplug "junegunn/fzf", 				from:github, use:"shell/key-bindings.zsh"
 
@@ -92,11 +98,6 @@ fi
 KEYTIMEOUT=1
 # bindkey -v
 
-if zplug check zsh-users/zsh-history-substring-search; then
-    bindkey '\eOA' history-substring-search-up
-    bindkey '\eOB' history-substring-search-down
-fi
-
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
@@ -113,3 +114,8 @@ alias la="exa -abghl --git --color=automatic"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# ASDF
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
