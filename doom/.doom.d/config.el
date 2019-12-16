@@ -2,16 +2,10 @@
 
 ;; ui config
 (setq line-spacing 0.25)
-;; (setq doom-font (font-spec :family "Iosveka" :size 16))
+(setq doom-font (font-spec :family "Iosevka" :size 16))
 
 ;; evil config
 (setq-default evil-escape-key-sequence "fd")
-
-;; Place your private configuration here
-(projectile-add-known-project "~/Documents/Develop/the-platform-client")
-(projectile-add-known-project "~/Documents/Develop/Clojure/shadow-ddp")
-
-
 
 (after! clojure-mode
 	(require 'flycheck-clj-kondo)
@@ -24,7 +18,16 @@
     (DELETE 2)
     (context 2)
     (for-all 2)
-    (checking 3))
+    (checking 3)
+    (>defn :defn)
+    (>defn- :defn)
+    (match 1)
+    (case 1)
+    (describe 1)
+    (it 2)
+    (fn-traced :defn)
+    (defn-traced :defn)
+    (assert-match 1))
   (setq clojure-align-forms-automatically t))
 
 (after! neotree
@@ -40,19 +43,3 @@
   (clojure-mode . aggressive-indent-mode)
   (lisp-mode . aggressive-indent-mode))
 
-(def-package! lispyville
-  :hook ((emacs-lisp-mode clojure-mode) . lispyville-mode)
-  :config
-  (lispyville-set-key-theme
-   '(operators
-     c-w
-     prettify
-     text-objects
-     atom-movement
-     commentary
-     wrap
-     slurp/barf-lispy
-     additional
-     additional-movement
-     additional-insert
-     escape)))
