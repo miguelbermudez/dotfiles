@@ -1,0 +1,10 @@
+{
+	"codeLens.enable": true,
+	"metals.statusBarEnabled": true,
+	"metals.sbtScript": "/usr/local/bin/sbt",
+	"metals.gradleScript": "/usr/local/bin/gradle",
+	"metals.millScript": "/usr/local/bin/mill",
+	"metals.javaHome": "/Users/miguelbermudez/.asdf/installs/java/adoptopenjdk-11.0.9+101",
+	"eslint.packageManager": "yarn",
+	"typescript.preferences.quoteStyle": "double"
+}

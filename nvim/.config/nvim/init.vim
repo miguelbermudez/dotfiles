@@ -20,7 +20,8 @@ Plug 'rakr/vim-two-firewatch'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " syntax highlighitng 
 " Plug 'sheerun/vim-polyglot'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
+Plug 'elixir-editors/vim-elixir'
 
 
 " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -278,5 +279,3 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
-
-
