@@ -29,15 +29,12 @@ Plug 'elixir-editors/vim-elixir'
 " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-vinegar'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'kien/rainbow_parentheses.vim'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
-
-" fuzzy search
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 
 " jump to any location
 Plug 'justinmk/vim-sneak'
@@ -63,6 +60,7 @@ Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'SidOfc/mkdx'
+Plug 'folke/tokyonight.nvim'
 
 
 " must be at the end
@@ -105,15 +103,13 @@ set background=dark " or light if you prefer the light version
 " Hit `%` on `if` to jump to `else`.
 runtime macros/matchit.vim
 
-colorscheme two-firewatch
+colorscheme tokyonight
+"colorscheme two-firewatch
 "colorscheme onedark 
 
 " open new split panes to right and below (as you probably expect)
 set splitright
 set splitbelow
-
-" every time we invoke Rg, FZF + ripgrep will not consider filename as a match in Vim
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
@@ -198,17 +194,6 @@ nnoremap <leader>eiv :e ~/.config/nvim/init.vim <CR>
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 
-" fzf.vim / skim.vim
-nnoremap <silent><Leader>pf :Files %:p:h<CR>
-nnoremap <leader>f :Rg<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>w :Windows<CR>
-nnoremap <leader>g :GFiles?<CR>
-nnoremap <leader>gc :Commits<CR>
-nnoremap <leader>/ :BLines<CR>
-nnoremap <leader>' :Marks<CR>
-nnoremap <leader>h :Helptags<CR>
-
 " find in file
 " remap sneak previous
 map \ <Plug>Sneak_,
@@ -219,6 +204,11 @@ command! -nargs=* Wrap set wrap linebreak nolist
 " open yank list
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
+" easier split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 " ┃ Tips                                                                    ┃
@@ -253,19 +243,20 @@ let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
                         \ 'links': { 'external': { 'enable': 1 } },
                         \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
                         \ 'fold': { 'enable': 1 } }
+""" Netrw
+" open files in a new vertical split
+" possible options:
+" 1 - open files in a new horizontal split
+" 2 - open files in a new vertical split
+" 3 - open files in a new tab
+" 4 - open in previous window
+let g:netrw_browse_split = 3
+" set the width of the directory explorer
+let g:netrw_winsize = 25
+
+
 " let g:polyglot_disabled = ['markdown', 'typescript']                                        
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_root_markers = ['build.sbt', '.p4ignore']
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-else
-  let g:ctrlp_clear_cache_on_exit = 0
-endif
+let g:ctrlp_user_command = 'find %s -type f'
 
 " CoC extensions
 let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-yank']
