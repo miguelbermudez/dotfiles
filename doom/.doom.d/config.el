@@ -1,5 +1,11 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+(setq user-full-name "Miguel Bermudez"
+      user-mail-address "miguel@miguelbermudez.com"
+      doom-font (font-spec :family "JetBrains Mono" :size 12)
+      line-spacing 0.35
+      doom-theme 'doom-laserwave)
+
 ;; ui config
 (setq line-spacing 0.25)
 (setq doom-font (font-spec :family "Iosevka" :size 16))
